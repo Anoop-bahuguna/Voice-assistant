@@ -1,0 +1,454 @@
+:root {
+  --ink: #f2f4f2;
+  --muted: #87909a;
+  --line: rgba(255, 255, 255, 0.12);
+  --acid: #d7f36b;
+  --cyan: #6de8e0;
+  --bg: #0b111c;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  min-height: 100%;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Space Grotesk", sans-serif;
+}
+button {
+  font: inherit;
+}
+.app-shell {
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 0 clamp(1.25rem, 5vw, 5rem);
+  position: relative;
+  background:
+    radial-gradient(
+      circle at 76% 44%,
+      rgba(48, 104, 119, 0.18),
+      transparent 27rem
+    ),
+    linear-gradient(120deg, #0b111c 0%, #101a29 52%, #0d1723 100%);
+}
+.app-shell::before {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  content: "";
+  inset: 0;
+  mask-image: linear-gradient(to bottom, black, transparent 75%);
+  pointer-events: none;
+  position: absolute;
+}
+.topbar,
+.dashboard,
+.footer {
+  margin: auto;
+  max-width: 1260px;
+  position: relative;
+  z-index: 1;
+}
+.topbar {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  padding: 1.6rem 0;
+}
+.brand {
+  align-items: center;
+  color: var(--ink);
+  display: flex;
+  font-size: 0.9rem;
+  font-weight: 700;
+  gap: 0.65rem;
+  letter-spacing: 0.22em;
+  text-decoration: none;
+}
+.brand-mark {
+  align-items: center;
+  background: var(--acid);
+  border-radius: 50%;
+  color: #10161b;
+  display: flex;
+  font-size: 1rem;
+  height: 1.65rem;
+  justify-content: center;
+  width: 1.65rem;
+}
+.brand-dot {
+  color: var(--acid);
+}
+.connection,
+.status-line,
+.eyebrow,
+.visual-label,
+.footer,
+.shortcut,
+.hint {
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.connection {
+  align-items: center;
+  display: flex;
+  gap: 0.55rem;
+}
+.pulse-dot {
+  background: var(--acid);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0.28rem rgba(215, 243, 107, 0.1);
+  height: 0.42rem;
+  width: 0.42rem;
+}
+.dashboard {
+  align-items: center;
+  display: grid;
+  gap: clamp(2rem, 5vw, 6rem);
+  grid-template-columns: minmax(320px, 0.95fr) minmax(280px, 0.8fr) minmax(
+      230px,
+      0.65fr
+    );
+  min-height: calc(100vh - 9.3rem);
+  padding: 4rem 0;
+}
+.eyebrow {
+  color: var(--cyan);
+  margin-bottom: 1.3rem;
+}
+.intro-panel h1 {
+  font-size: clamp(3.5rem, 6vw, 6.1rem);
+  font-weight: 600;
+  letter-spacing: -0.07em;
+  line-height: 0.93;
+}
+.intro-panel h1 span {
+  color: var(--acid);
+}
+.intro-copy {
+  color: #b0b8bf;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  margin: 2rem 0 2.4rem;
+  max-width: 29rem;
+}
+.command-row {
+  display: flex;
+}
+.listen {
+  align-items: center;
+  background: var(--acid);
+  border: 0;
+  border-radius: 0.35rem;
+  color: #11181d;
+  cursor: pointer;
+  display: flex;
+  font-size: 0.92rem;
+  font-weight: 700;
+  gap: 0.8rem;
+  justify-content: space-between;
+  min-width: min(100%, 19rem);
+  padding: 1.1rem 1.2rem;
+  transition:
+    box-shadow 0.25s,
+    transform 0.25s,
+    background 0.25s;
+}
+.listen:hover {
+  box-shadow:
+    0 0 0 0.3rem rgba(215, 243, 107, 0.12),
+    0 1rem 2rem rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+.listen.is-listening {
+  background: #ff8678;
+}
+.mic-icon {
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  height: 1.25rem;
+  line-height: 1.05rem;
+  text-align: center;
+  width: 1.25rem;
+}
+.shortcut {
+  color: rgba(17, 24, 29, 0.6);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+}
+.status-line {
+  align-items: center;
+  display: flex;
+  gap: 0.55rem;
+  margin-top: 1rem;
+  text-transform: none;
+}
+.status-icon {
+  color: var(--acid);
+  font-size: 1rem;
+}
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 2.7rem;
+}
+.quick-command {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 2rem;
+  color: #bac1c6;
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 0.55rem 0.9rem;
+  transition:
+    border 0.2s,
+    color 0.2s;
+}
+.quick-command:hover {
+  border-color: var(--acid);
+  color: var(--acid);
+}
+.quick-command span {
+  color: var(--acid);
+  margin-right: 0.25rem;
+}
+.visual-panel {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 29rem;
+  position: relative;
+}
+.visual-panel img {
+  filter: drop-shadow(0 1.8rem 1.8rem rgba(0, 0, 0, 0.42));
+  max-height: 25rem;
+  max-width: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+}
+.orbit {
+  border: 1px solid rgba(109, 232, 224, 0.22);
+  border-radius: 50%;
+  height: 23rem;
+  position: absolute;
+  transform: rotate(-22deg);
+  width: 12rem;
+}
+.orbit-one {
+  border-color: rgba(215, 243, 107, 0.22);
+  height: 28rem;
+  transform: rotate(66deg);
+  width: 11rem;
+}
+.orbit-two {
+  height: 19rem;
+  transform: rotate(110deg);
+  width: 24rem;
+}
+.visual-label {
+  font-size: 0.58rem;
+  position: absolute;
+  z-index: 3;
+}
+.label-top {
+  left: 5%;
+  top: 10%;
+}
+.label-top span {
+  color: var(--acid);
+}
+.label-bottom {
+  bottom: 9%;
+  right: 7%;
+}
+.label-bottom span {
+  color: var(--muted);
+  margin-right: 0.55rem;
+}
+.scan-line {
+  animation: scan 4s ease-in-out infinite;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(109, 232, 224, 0.65),
+    transparent
+  );
+  height: 1px;
+  left: 7%;
+  position: absolute;
+  right: 7%;
+  top: 51%;
+  z-index: 4;
+}
+.activity-panel {
+  align-self: stretch;
+  border-left: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 0 1.25rem clamp(1.5rem, 3vw, 2.8rem);
+}
+.panel-heading {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+}
+.panel-heading .eyebrow {
+  margin-bottom: 0.45rem;
+}
+.panel-heading h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.activity-count {
+  color: var(--acid);
+  font-family: "DM Mono", monospace;
+  font-size: 0.75rem;
+}
+.transcript {
+  flex: 1;
+  margin-top: 2rem;
+  min-height: 13rem;
+}
+.empty-state {
+  align-items: center;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  display: flex;
+  gap: 0.8rem;
+  padding-top: 1rem;
+}
+.empty-state span {
+  color: var(--acid);
+  font-size: 1.4rem;
+}
+.empty-state p {
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+.activity-item {
+  border-top: 1px solid var(--line);
+  padding: 1rem 0;
+}
+.activity-item small {
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: 0.6rem;
+}
+.activity-item p {
+  color: #d9dedf;
+  font-size: 0.86rem;
+  margin-top: 0.35rem;
+}
+.hint {
+  border-top: 1px solid var(--line);
+  line-height: 1.5;
+  padding-top: 1rem;
+}
+.hint span {
+  color: var(--acid);
+  margin-right: 0.7rem;
+}
+.footer {
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2rem 0;
+}
+.footer span:last-child {
+  color: #56616d;
+}
+@keyframes scan {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(-8rem);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(8rem);
+  }
+}
+@media (max-width: 950px) {
+  .dashboard {
+    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    padding: 3rem 0;
+  }
+  .visual-panel {
+    grid-column: 2;
+    grid-row: 1;
+    min-height: 23rem;
+  }
+  .intro-panel {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .activity-panel {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    min-height: 14rem;
+  }
+  .transcript {
+    min-height: 7rem;
+  }
+}
+@media (max-width: 620px) {
+  .app-shell {
+    padding: 0 1.25rem;
+  }
+  .connection {
+    font-size: 0;
+  }
+  .connection .pulse-dot {
+    font-size: initial;
+  }
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 3.5rem 0 2rem;
+  }
+  .intro-panel h1 {
+    font-size: clamp(3.3rem, 16vw, 5rem);
+  }
+  .visual-panel {
+    min-height: 20rem;
+    order: 2;
+  }
+  .visual-panel img {
+    max-height: 18rem;
+  }
+  .orbit-one {
+    height: 21rem;
+  }
+  .orbit-two {
+    height: 15rem;
+    width: 19rem;
+  }
+  .activity-panel {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    order: 3;
+    padding: 1.5rem 0 0;
+  }
+  .footer {
+    font-size: 0.58rem;
+    gap: 1rem;
+  }
+  .footer span:last-child {
+    text-align: right;
+  }
+}
